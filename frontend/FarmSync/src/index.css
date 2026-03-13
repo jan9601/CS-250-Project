@@ -1,1 +1,82 @@
 @import "tailwindcss";
+
+@theme {
+  /*****************/
+  /* PRIMARY COLORS */
+  /*****************/
+
+  /* Logo, Titles, Sidebar Elements, Highlights */
+  --color-brand-primary: #2e7d32;
+
+  /* Sidebar Background, Dashboard Headers, Strong hover */
+  --color-brand-dark: #1b5e20;
+
+  /* Light hover, Graph (positive data) */
+  --color-brand-light: #66bb6a;
+
+  /*****************/
+  /* ACTION COLORS */
+  /*****************/
+
+  /* Primary Buttons, Links, Primary System Actions */
+  --color-action-primary: #1565c0;
+
+  /* Blue button hover, Active State */
+  --color-action-hover: #0d47a1;
+
+  /* Selected Elements, Active tabs, Visual Indicators */
+  --color-action-light: #42a5f5;
+
+  /*****************/
+  /* ACCENT COLORS */
+  /*****************/
+
+  /* "Harvest Soon", Medium prediction confidence, Non-     critical Alerts */
+  --color-accent-harvest: #f9a825;
+
+  /* Light Badges, Light highlight in cards */
+  --color-accent-light: #fdd835;
+
+  /*****************/
+  /* STATUS COLORS */
+  /*****************/
+  /* Paid order, Concluded Operation */
+  --color-success: #2e7d32;
+
+  /* Harvest Coming, Low Stock */
+  --color-alert: #f9a825;
+
+  /* Errors*/
+  --color-error: #d32f2f;
+
+  /* Technical Information, Prediction result, tooltips */
+  --color-info: #0288d1;
+
+  /*************************/
+  /* USER INTERFACE COLORS */
+  /*************************/
+  --color-bg: #f5f7f6;
+
+  /* Cards, Modals, Containers */
+  --color-surface: #fff;
+
+  /* Input borders, Divisors */
+  --color-border: #e0e0e0;
+
+  --color-text-primary: #2c2c2c;
+  --color-text-secondary: #616161;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background-color: var(--color-surface);
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 26rem 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+}
