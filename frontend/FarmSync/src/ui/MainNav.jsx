@@ -6,7 +6,7 @@ import {RiLeafLine} from "react-icons/ri";
 function MainNav() {
   return (
     <nav>
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-4">
         <NavItem to="/dashboard" icon={<HiOutlineHome />}>
           Dashboard
         </NavItem>
