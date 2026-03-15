@@ -80,3 +80,67 @@ body {
   grid-template-rows: auto 1fr;
   height: 100vh;
 }
+
+/* *************** */
+/* LOADING SPINNER*/
+/* ****************/
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite;
+}
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid var(--color-action-primary);
+  animation: prixClipFix 2s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes prixClipFix {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+  }
+}
+
+/**
+ * Shared grid used by the crops table header and each row.
+ * Using the same grid in both places keeps all columns aligned.
+ */
+.crops-row {
+  display: grid;
+  grid-template-columns: 2fr 1.4fr 1.1fr 1fr 1fr 1.2fr 1.2fr;
+  column-gap: 2rem;
+  align-items: center;
+  padding: 1.6rem 2.4rem;
+}
+
+/**
+ * Adds a separator line between rows.
+ * This must be written this way in normal CSS.
+ */
+.crops-row:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
