@@ -1,2 +1,4 @@
 # FarmSync AI prediction DEV BRANCH
 This branch is dedicated to housing all the files used to create the farm sync AI model
+
+ADD how to train new models for new crops
