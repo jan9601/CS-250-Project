@@ -23,7 +23,7 @@ predict_harvest(crop_type, daily_weather, season_start_date)
 crop_type : a string identifying the crop (right now only ones supported are "almonds" & "table_grapes"
 
 daily_weather : a list of daily weather observations
-Each entry must contain date, tmin, tmax 
+Each entry must contain date, tmin, tmax\ 
   -> YYYY-MM-DD, daily minimum temperature (ºC), daily maximum temperature (ºC)
 
 example: 
