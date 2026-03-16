@@ -59,15 +59,17 @@ function CropsRow({crop}) {
 
   return (
     <div className="crops-row bg-surface text-xs text-text-primary ">
-      <div className="font-semibold ">{name}</div>
+      <div className="font-semibold justify-self-start">{name}</div>
 
-      <div className="">{predictedHarvestDate}</div>
+      <div className="justify-self-center">{predictedHarvestDate}</div>
 
-      <div className="">{(confidenceScore * 100).toFixed()}%</div>
+      <div className=" justify-self-center mr-4">
+        {(confidenceScore * 100).toFixed()}%
+      </div>
 
-      <div className="">{formatCurrency(price)}</div>
+      <div className="justify-self-center">{formatCurrency(price)}</div>
 
-      <div className="mx-auto min-w-10">{quantity}</div>
+      <div className="justify-self-center">{quantity}</div>
 
       <span
         className={`w-26 mx-auto justify-center rounded-full py-1 text-center text-[11px] font-medium ${statusStyle[status]}`}

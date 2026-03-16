@@ -39,7 +39,7 @@ function CreateCropForm() {
         <select
           id="name"
           {...register("name")}
-          className="border border-border p-2 cursor-pointer"
+          className="border text-xs border-border p-2 cursor-pointer"
         >
           <option>Almonds</option>
           <option>Table grapes</option>
@@ -59,7 +59,7 @@ function CreateCropForm() {
 
       <FormRow label="Location">
         <select
-          className="border border-border p-2 cursor-pointer"
+          className="border text-xs border-border p-2 cursor-pointer"
           id="location"
           {...register("location")}
         >

@@ -2,7 +2,7 @@ function FormRow({label, error = null, children}) {
   return (
     <div className="form-row">
       {label && (
-        <label htmlFor={children.props.id} className="font-semibold">
+        <label htmlFor={children.props.id} className="font-semibold text-xs">
           {label}
         </label>
       )}
