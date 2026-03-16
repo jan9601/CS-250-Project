@@ -49,7 +49,7 @@ def simulate_harvest_dates(
 
 def main():
     project_root = Path(__file__).resolve().parents[2]
-    in_path = project_root / "data" / "weather_with_gdd.csv"
+    in_path = project_root / "data" / "weather_with_gdd_almonds.csv"
     out_path = project_root / "data" / "almond_seasons.csv"
 
     df = pd.read_csv(in_path)
