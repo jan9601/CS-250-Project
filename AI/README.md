@@ -24,7 +24,7 @@ crop_type : a string identifying the crop (right now only ones supported are "al
 
 daily_weather : a list of daily weather observations
 Each entry must contain date, tmin, tmax<br/>
-     -> YYYY-MM-DD, daily minimum temperature (ºC), daily maximum temperature (ºC)
+<sub>YYYY-MM-DD, daily minimum temperature (ºC), daily maximum temperature (ºC)</sub>
 
 example: 
 ```
