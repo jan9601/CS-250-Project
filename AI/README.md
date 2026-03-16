@@ -14,3 +14,8 @@ Each crop uses a seperately trained model for MVP simplicity!
 The almond model was trained using weather data from Fresno, CA
 The table grapes model was trained using weather data from Bakersfield, CA
 
+## Function
+The API function for the AI is 
+'''
+predict_harvest(crop_type, daily_weather, season_start_date)
+'''
