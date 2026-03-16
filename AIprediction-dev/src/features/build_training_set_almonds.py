@@ -3,7 +3,7 @@ import pandas as pd
 
 def main():
     project_root = Path(__file__).resolve().parents[2]
-    weather_path = project_root / "data" / "weather_with_gdd.csv"
+    weather_path = project_root / "data" / "weather_with_gdd_almonds.csv"
     seasons_path = project_root / "data" / "almond_seasons.csv"
     out_path = project_root / "data" / "almonds_training.csv"
 
