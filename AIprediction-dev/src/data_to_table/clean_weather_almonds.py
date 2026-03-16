@@ -3,8 +3,8 @@ import pandas as pd
 
 def main():
     project_root = Path(__file__).resolve().parents[2]
-    in_path = project_root / "data" / "daily_weather.csv"
-    out_path = project_root / "data" / "daily_weather_clean.csv"
+    in_path = project_root / "data" / "daily_weather_almonds.csv"
+    out_path = project_root / "data" / "daily_weather_clean_almonds.csv"
 
     df = pd.read_csv(in_path)
 
