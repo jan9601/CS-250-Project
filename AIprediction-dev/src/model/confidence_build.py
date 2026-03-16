@@ -82,7 +82,7 @@ def main():
     project_root = Path(__file__).resolve().parents[2]
 
     model_path = project_root / "models" / "almond_rf.joblib"
-    weather_path = project_root / "data" / "weather_with_gdd.csv"
+    weather_path = project_root / "data" / "weather_with_gdd_almonds.csv"
 
     # load model
     saved = joblib.load(model_path)
