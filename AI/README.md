@@ -19,3 +19,41 @@ The API function for the AI is
 ```
 predict_harvest(crop_type, daily_weather, season_start_date)
 ```
+### Parameters
+crop_type : a string identifying the crop (right now only ones supported are "almonds" & "table_grapes"
+
+daily_weather : a list of daily weather observations
+Each entry must contain date, tmin, tmax --> YYYY-MM-DD, daily minimum temperature (ºC), daily maximum temperature (ºC)
+
+example: 
+```
+[
+  {"date": "2024-06-10", "tmin": 15.2, "tmax": 31.8],
+  {"date": "2024-06-11", "tmin": 16.2, "tmax": 33.1],
+  {"date": "2024-06-12", "tmin": 15.6, "tmax": 31.2],
+]
+```
+
+*Weather data must include all days from the season start date through the prediction date.*
+
+season_start_date : the beginning of the crop's growing season
+
+example:
+```
+"2024-03-01" # almonds
+"2024-04-01" # table grapes
+```
+
+### Output
+The function returns a dictionary containing: 
+```
+{
+  "crop_type": "table_grapes",
+  "prediction_date": "2024-06-15",
+  "predicted_days_to_harvest": 62.48,
+  "predicted_harvest_date": "2024-08-16",
+  "confidence": 0.72,
+  "range_start": "2024-08-10",
+  "range_end": "2024-08-20"
+}
+```
