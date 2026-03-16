@@ -58,7 +58,7 @@ def main():
     data_dir = project_root / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
 
-    out_path = data_dir / "daily_weather.csv"
+    out_path = data_dir / "daily_weather_almonds.csv"
     print("Saving to:", out_path)
 
     daily_df.to_csv(out_path, index=False)
