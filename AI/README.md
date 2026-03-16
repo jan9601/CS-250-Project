@@ -11,7 +11,7 @@ Currently supported crops include:
 Each crop uses a seperately trained model for MVP simplicity!
 
 ### Training Regions
-The almond model was trained using weather data from Fresno, CA
+The almond model was trained using weather data from Fresno, CA<br/>
 The table grapes model was trained using weather data from Bakersfield, CA
 
 ## Function
