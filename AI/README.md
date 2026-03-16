@@ -16,6 +16,6 @@ The table grapes model was trained using weather data from Bakersfield, CA
 
 ## Function
 The API function for the AI is 
-'''
+```
 predict_harvest(crop_type, daily_weather, season_start_date)
-'''
+```
