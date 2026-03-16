@@ -77,7 +77,7 @@ function CropsRow({crop}) {
         </span>
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-lg text-brand-primary">
+      <div className="flex items-center justify-center gap-2 text-2xl text-brand-primary">
         <button
           type="button"
           className="cursor-pointer rounded-md p-1 transition-colors hover:bg-brand-light/20"
