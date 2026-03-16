@@ -58,26 +58,24 @@ function CropsRow({crop}) {
   };
 
   return (
-    <div className="crops-row bg-surface text-sm text-text-primary">
-      <div className="font-semibold">{name}</div>
+    <div className="crops-row bg-surface text-xs text-text-primary ">
+      <div className="font-semibold ">{name}</div>
 
-      <div>{predictedHarvestDate}</div>
+      <div className="">{predictedHarvestDate}</div>
 
-      <div>{(confidenceScore * 100).toFixed()}%</div>
+      <div className="">{(confidenceScore * 100).toFixed()}%</div>
 
-      <div>{formatCurrency(price)}</div>
+      <div className="">{formatCurrency(price)}</div>
 
-      <div>{quantity}</div>
+      <div className="mx-auto min-w-10">{quantity}</div>
 
-      <div className="flex justify-center">
-        <span
-          className={`inline-block min-w-30 rounded-full px-3 py-1 text-center text-xs font-medium uppercase ${statusStyle[status]}`}
-        >
-          {status}
-        </span>
-      </div>
+      <span
+        className={`w-26 mx-auto justify-center rounded-full py-1 text-center text-[11px] font-medium ${statusStyle[status]}`}
+      >
+        {status}
+      </span>
 
-      <div className="flex items-center justify-center gap-2 text-2xl text-brand-primary">
+      <div className="flex items-center justify-self-center gap-2 text-[16px] text-brand-primary">
         <button
           type="button"
           className="cursor-pointer rounded-md p-1 transition-colors hover:bg-brand-light/20"

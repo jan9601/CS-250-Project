@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 function CreateCropForm() {
   const {register, handleSubmit, reset, formState} = useForm();
   const {errors} = formState;
-  console.log(errors);
 
   const queryClient = useQueryClient();
 
@@ -54,6 +53,7 @@ function CreateCropForm() {
           {...register("plantingDate", {
             required: "This field is required",
           })}
+          disabled={isCreating}
         />
       </FormRow>
 
@@ -80,6 +80,7 @@ function CreateCropForm() {
               message: "Price should be at least $1",
             },
           })}
+          disabled={isCreating}
         />
       </FormRow>
 
@@ -94,12 +95,13 @@ function CreateCropForm() {
               message: "Quantity should be at least 1",
             },
           })}
+          disabled={isCreating}
         />
       </FormRow>
 
       <FormRow label="Crop description (optional)">
         <textarea
-          className="px-3 py-4 border border-border rounded-sm shadow-sm w-full h-fit"
+          className="px-3 py-4 border border-border rounded-sm shadow-sm w-max h-15"
           type="text"
           id="description"
           {...register("description")}

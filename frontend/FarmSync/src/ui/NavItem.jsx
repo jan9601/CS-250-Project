@@ -25,8 +25,8 @@ function NavItem({to, icon, children}) {
         to={to}
         className={({isActive}) =>
           `
-          flex items-center gap-3 px-6 py-3 rounded-md
-          text-xl transition-colors
+          flex items-center gap-3 px-4 py-3 rounded-md
+          text-base transition-colors
           ${
             isActive
               ? "bg-brand-primary/15 text-brand-primary"

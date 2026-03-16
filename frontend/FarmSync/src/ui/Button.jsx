@@ -23,10 +23,10 @@ const sizes = {
 
 const variations = {
   primary:
-    "bg-action-primary text-white hover:bg-action-hover focus:ring-action-light",
+    "bg-action-primary text-white enabled:hover:bg-action-hover disabled:cursor-not-allowed focus:ring-action-light",
   secondary:
-    "bg-surface text-text-primary border border-border hover:bg-bg focus:ring-action-light",
-  danger: "bg-error text-white hover:brightness-90 focus:ring-error",
+    "bg-surface text-text-primary border border-border enabled:hover:bg-bg focus:ring-action-light",
+  danger: "bg-error text-white enabled:hover:brightness-90 focus:ring-error ",
 };
 
 export default function Button({
