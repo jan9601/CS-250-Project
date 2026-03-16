@@ -23,7 +23,8 @@ predict_harvest(crop_type, daily_weather, season_start_date)
 crop_type : a string identifying the crop (right now only ones supported are "almonds" & "table_grapes"
 
 daily_weather : a list of daily weather observations
-Each entry must contain date, tmin, tmax --> YYYY-MM-DD, daily minimum temperature (ºC), daily maximum temperature (ºC)
+Each entry must contain date, tmin, tmax 
+  -> YYYY-MM-DD, daily minimum temperature (ºC), daily maximum temperature (ºC)
 
 example: 
 ```
@@ -57,3 +58,18 @@ The function returns a dictionary containing:
   "range_end": "2024-08-20"
 }
 ```
+
+## Model Overview
+The model uses 
+- Random Forest regression
+- Growing Degree Days (GDD) derived from the temperature of that day
+- Rolling temperature features
+
+## Installation 
+Install the required dependencies 
+pip install -r requirements.txt
+
+## Notes
+- Temperature inputs MUST be in Celcius
+- Predicitons assume the weather data begins at the crops season start date
+- The training scripts for the model are in the ml-dev/Farmsync branch
