@@ -4,7 +4,7 @@ import Row from "../ui/Row";
 
 function Crops() {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 max-w-480 m-[0 auto]">
       <Row type="horizontal">
         <Heading type="h1" className="text-text-primary">
           All crops

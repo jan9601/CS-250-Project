@@ -1,6 +1,9 @@
 import {HiSquare2Stack} from "react-icons/hi2";
 import {formatCurrency} from "../../utils/helpers";
 import {HiPencil, HiTrash} from "react-icons/hi";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {deleteCrop} from "../../services/cropsApi";
+import toast from "react-hot-toast";
 
 /**
  * CropsRow
@@ -27,6 +30,19 @@ function CropsRow({crop}) {
     quantity,
     status,
   } = crop;
+
+  const queryClient = useQueryClient();
+
+  const {isLoading: isDeleting, mutate} = useMutation({
+    mutationFn: deleteCrop,
+    onSuccess: () => {
+      toast.success("Crop successfully deleted");
+      queryClient.invalidateQueries({
+        queryKey: ["crops"],
+      });
+    },
+    onError: (err) => toast.error(err.message),
+  });
 
   /**
    * Maps each crop status to a badge color style.
@@ -85,6 +101,8 @@ function CropsRow({crop}) {
           className="cursor-pointer rounded-md p-1 transition-colors hover:bg-error/10 hover:text-error"
           aria-label={`Delete ${name}`}
           title="Delete crop"
+          onClick={() => mutate(cropId)}
+          disabled={isDeleting}
         >
           <HiTrash />
         </button>

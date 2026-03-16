@@ -10,17 +10,42 @@ import {getData, setData} from "./storage";
 const CROPS_KEY = "farmsync_fakeCrops";
 
 export function initCrops() {
-  const data = getData(CROPS_KEY);
-  if (!data) setData(CROPS_KEY, cropsData);
+  try {
+    const data = getData(CROPS_KEY);
+    if (!data) setData(CROPS_KEY, cropsData);
+  } catch (error) {
+    console.error(error);
+    throw new Error("Could not init crops data");
+  }
 }
 
 export function getCrops() {
   initCrops();
+  try {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const data = getData(CROPS_KEY);
+        resolve(data);
+      }, 300);
+    });
+  } catch (error) {
+    console.error(error);
+    throw new Error("Could not get Crops");
+  }
+}
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const data = getData(CROPS_KEY);
-      resolve(data);
-    }, 300);
-  });
+export function deleteCrop(id) {
+  try {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const crops = getData(CROPS_KEY);
+        const newCrops = crops.filter((crop) => crop.id !== id);
+        setData(CROPS_KEY, newCrops);
+        resolve();
+      }, 300);
+    });
+  } catch (error) {
+    console.error(error);
+    throw new Error("Crop could not be deleted");
+  }
 }
