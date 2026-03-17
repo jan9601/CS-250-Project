@@ -21,39 +21,39 @@ export function initCrops() {
 
 export function getCrops() {
   initCrops();
-  return new Promise((resolve) => {
-    try {
-      setTimeout(() => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
         const data = getData(CROPS_KEY);
         resolve(data);
-      }, 300);
-    } catch (error) {
-      console.error(error);
-      throw new Error("Could not get Crops");
-    }
+      } catch (error) {
+        console.error(error);
+        reject(new Error("Could not get Crops"));
+      }
+    }, 300);
   });
 }
 
 export function deleteCrop(id) {
-  return new Promise((resolve) => {
-    try {
-      setTimeout(() => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
         const crops = getData(CROPS_KEY);
         const newCrops = crops.filter((crop) => crop.id !== id);
         setData(CROPS_KEY, newCrops);
         resolve();
-      }, 300);
-    } catch (error) {
-      console.error(error);
-      throw new Error("Crop could not be deleted");
-    }
+      } catch (error) {
+        console.error(error);
+        reject(new Error("Crop could not be deleted"));
+      }
+    }, 300);
   });
 }
 
 export function createCrop(crop) {
-  return new Promise((resolve) => {
-    try {
-      setTimeout(() => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
         const oldCrops = getData(CROPS_KEY) || [];
         const newCrop = {
           ...crop,
@@ -65,10 +65,30 @@ export function createCrop(crop) {
         const fullNewCropsData = [...oldCrops, newCrop];
         setData(CROPS_KEY, fullNewCropsData);
         resolve(newCrop);
-      }, 500);
-    } catch (error) {
-      console.error(error);
-      throw new Error("Crop could not be added");
-    }
+      } catch (error) {
+        console.error(error);
+        reject(new Error("Crop could not be added"));
+      }
+    }, 500);
+  });
+}
+
+export function updateExistingCrop(updatedCrop, id) {
+  const crops = getData(CROPS_KEY) || [];
+
+  const newCrops = crops.map((crop) =>
+    crop.id === id ? {...crop, ...updatedCrop} : crop,
+  );
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        setData(CROPS_KEY, newCrops);
+        resolve(newCrops);
+      } catch (error) {
+        console.error(error);
+        reject(new Error("Crop could not be added"));
+      }
+    }, 300);
   });
 }

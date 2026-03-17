@@ -1,18 +1,25 @@
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {useForm} from "react-hook-form";
+import toast from "react-hot-toast";
+
 import Button from "../../ui/Button";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {createCrop} from "../../services/cropsApi";
-import toast from "react-hot-toast";
 
-function CreateCropForm() {
-  const {register, handleSubmit, reset, formState} = useForm();
+import {createCrop, updateExistingCrop} from "../../services/cropsApi";
+
+function CreateCropForm({cropToEdit = {}}) {
+  const {id: editId, ...editValues} = cropToEdit;
+  const isEditSession = Boolean(editId);
+
+  const {register, handleSubmit, reset, formState} = useForm({
+    defaultValues: isEditSession ? editValues : {},
+  });
   const {errors} = formState;
 
   const queryClient = useQueryClient();
 
-  const {mutate, isLoading: isCreating} = useMutation({
+  const {mutate: createNewCrop, isLoading: isCreating} = useMutation({
     mutationFn: createCrop,
     onSuccess: () => {
       toast.success("New crop successfully created");
@@ -22,8 +29,21 @@ function CreateCropForm() {
     onError: (err) => toast.error(err.message),
   });
 
+  const {mutate: updateCrop, isLoading: isUpdating} = useMutation({
+    mutationFn: ({newCabinData, id}) => updateExistingCrop(newCabinData, id),
+    onSuccess: () => {
+      toast.success("Crop successfully updated");
+      queryClient.invalidateQueries({queryKey: ["crops"]});
+      reset();
+    },
+    onError: (err) => toast.error(err.message),
+  });
+
+  const isWorking = isCreating || isUpdating;
+
   function onSubmit(data) {
-    mutate(data);
+    if (isEditSession) updateCrop({newCabinData: data, id: editId});
+    else createNewCrop(data);
   }
 
   function onError(errors) {
@@ -53,7 +73,7 @@ function CreateCropForm() {
           {...register("plantingDate", {
             required: "This field is required",
           })}
-          disabled={isCreating}
+          disabled={isWorking}
         />
       </FormRow>
 
@@ -80,7 +100,7 @@ function CreateCropForm() {
               message: "Price should be at least $1",
             },
           })}
-          disabled={isCreating}
+          disabled={isWorking}
         />
       </FormRow>
 
@@ -95,13 +115,13 @@ function CreateCropForm() {
               message: "Quantity should be at least 1",
             },
           })}
-          disabled={isCreating}
+          disabled={isWorking}
         />
       </FormRow>
 
       <FormRow label="Crop description (optional)">
         <textarea
-          className="px-3 py-4 border border-border rounded-sm shadow-sm w-max h-15"
+          className="px-3 py-4 border text-sm border-border rounded-sm shadow-sm w-max h-15"
           type="text"
           id="description"
           {...register("description")}
@@ -112,8 +132,8 @@ function CreateCropForm() {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button type="submit" disabled={isCreating}>
-          Add Crop
+        <Button type="submit" disabled={isWorking}>
+          {isEditSession ? "Edit Crop" : "Create new crop"}
         </Button>
       </FormRow>
     </form>
