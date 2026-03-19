@@ -1,11 +1,9 @@
 import {HiSquare2Stack} from "react-icons/hi2";
 import {formatCurrency} from "../../utils/helpers";
 import {HiPencil, HiTrash} from "react-icons/hi";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {deleteCrop} from "../../services/cropsApi";
-import toast from "react-hot-toast";
 import {useState} from "react";
 import CreateCropForm from "./CreateCropForm";
+import {useDeleteCrop} from "./useDeleteCrop";
 
 /**
  * CropsRow
@@ -23,6 +21,7 @@ import CreateCropForm from "./CreateCropForm";
  */
 function CropsRow({crop}) {
   const [showForm, setShowForm] = useState(false);
+  const {isDeleting, deleteCrop} = useDeleteCrop();
 
   const {
     id: cropId,
@@ -34,19 +33,6 @@ function CropsRow({crop}) {
     quantity,
     status,
   } = crop;
-
-  const queryClient = useQueryClient();
-
-  const {isLoading: isDeleting, mutate} = useMutation({
-    mutationFn: deleteCrop,
-    onSuccess: () => {
-      toast.success("Crop successfully deleted");
-      queryClient.invalidateQueries({
-        queryKey: ["crops"],
-      });
-    },
-    onError: (err) => toast.error(err.message),
-  });
 
   /**
    * Maps each crop status to a badge color style.
@@ -61,6 +47,8 @@ function CropsRow({crop}) {
     FUTURE: "bg-info/15 text-info",
   };
 
+  console.log("name ", name, " price, ", price, " quantity ", quantity);
+
   return (
     <>
       <div className="crops-row bg-surface text-xs text-text-primary ">
@@ -72,9 +60,9 @@ function CropsRow({crop}) {
           {(confidenceScore * 100).toFixed()}%
         </div>
 
-        <div className="justify-self-center">{formatCurrency(price)}</div>
+        <div className="justify-self-center">{formatCurrency(+price)}</div>
 
-        <div className="justify-self-center">{quantity}</div>
+        <div className="justify-self-center">{+quantity}</div>
 
         <span
           className={`w-26 mx-auto justify-center rounded-full py-1 text-center text-[11px] font-medium ${statusStyle[status]}`}
@@ -82,16 +70,7 @@ function CropsRow({crop}) {
           {status}
         </span>
 
-        <div className="flex items-center justify-self-center gap-2 text-[16px] text-brand-primary">
-          <button
-            type="button"
-            className="cursor-pointer rounded-md p-1 transition-colors hover:bg-brand-light/20"
-            aria-label={`Duplicate ${name}`}
-            title="Duplicate crop"
-          >
-            <HiSquare2Stack />
-          </button>
-
+        <div className="flex items-center justify-self-center gap-2 text-lg text-brand-primary">
           <button
             type="button"
             className="cursor-pointer rounded-md p-1 transition-colors hover:bg-brand-light/20"
@@ -107,7 +86,7 @@ function CropsRow({crop}) {
             className="cursor-pointer rounded-md p-1 transition-colors hover:bg-error/10 hover:text-error"
             aria-label={`Delete ${name}`}
             title="Delete crop"
-            onClick={() => mutate(cropId)}
+            onClick={() => deleteCrop(cropId)}
             disabled={isDeleting}
           >
             <HiTrash />

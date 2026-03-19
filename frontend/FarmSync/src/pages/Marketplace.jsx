@@ -7,7 +7,7 @@ function MarketPlace() {
       <Heading type="h1" className="text-text-primary">
         Marketplace
       </Heading>
-      <p>TEST</p>
+      <p>Filter / Sort</p>
     </Row>
   );
 }

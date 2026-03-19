@@ -1,12 +1,11 @@
-import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {useForm} from "react-hook-form";
-import toast from "react-hot-toast";
 
 import Button from "../../ui/Button";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 
-import {createCrop, updateExistingCrop} from "../../services/cropsApi";
+import {useCreateCrop} from "./useCreateCrop";
+import {useUpdateCrop} from "./useUpdateCrop";
 
 function CreateCropForm({cropToEdit = {}}) {
   const {id: editId, ...editValues} = cropToEdit;
@@ -16,34 +15,23 @@ function CreateCropForm({cropToEdit = {}}) {
     defaultValues: isEditSession ? editValues : {},
   });
   const {errors} = formState;
-
-  const queryClient = useQueryClient();
-
-  const {mutate: createNewCrop, isLoading: isCreating} = useMutation({
-    mutationFn: createCrop,
-    onSuccess: () => {
-      toast.success("New crop successfully created");
-      queryClient.invalidateQueries({queryKey: ["crops"]});
-      reset();
-    },
-    onError: (err) => toast.error(err.message),
-  });
-
-  const {mutate: updateCrop, isLoading: isUpdating} = useMutation({
-    mutationFn: ({newCabinData, id}) => updateExistingCrop(newCabinData, id),
-    onSuccess: () => {
-      toast.success("Crop successfully updated");
-      queryClient.invalidateQueries({queryKey: ["crops"]});
-      reset();
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const {isCreating, createNewCrop} = useCreateCrop();
+  const {isUpdating, updateCrop} = useUpdateCrop();
 
   const isWorking = isCreating || isUpdating;
 
   function onSubmit(data) {
-    if (isEditSession) updateCrop({newCabinData: data, id: editId});
-    else createNewCrop(data);
+    if (isEditSession)
+      updateCrop(
+        {updatedCrop: data, id: editId},
+        {
+          onSuccess: () => reset(),
+        },
+      );
+    else
+      createNewCrop(data, {
+        onSuccess: () => reset(),
+      });
   }
 
   function onError(errors) {
