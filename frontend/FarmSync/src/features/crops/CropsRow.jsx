@@ -1,9 +1,9 @@
-import {HiSquare2Stack} from "react-icons/hi2";
 import {formatCurrency} from "../../utils/helpers";
 import {HiPencil, HiTrash} from "react-icons/hi";
 import {useState} from "react";
 import CreateCropForm from "./CreateCropForm";
 import {useDeleteCrop} from "./useDeleteCrop";
+import {formatStatus} from "../../utils/formatStatus";
 
 /**
  * CropsRow
@@ -47,8 +47,6 @@ function CropsRow({crop}) {
     FUTURE: "bg-info/15 text-info",
   };
 
-  console.log("name ", name, " price, ", price, " quantity ", quantity);
-
   return (
     <>
       <div className="crops-row bg-surface text-xs text-text-primary ">
@@ -67,7 +65,7 @@ function CropsRow({crop}) {
         <span
           className={`w-26 mx-auto justify-center rounded-full py-1 text-center text-[11px] font-medium ${statusStyle[status]}`}
         >
-          {status}
+          {formatStatus(status)}
         </span>
 
         <div className="flex items-center justify-self-center gap-2 text-lg text-brand-primary">
