@@ -1,4 +1,4 @@
-pandas - ver 2.2.3
-numpy - ver 1.26.4
-joblib - ver 1.4.2
-scikit-learn - ver 1.5.2
+pandas==2.2.3
+numpy==1.26.4
+joblib==1.4.2
+scikit-learn==1.5.2
