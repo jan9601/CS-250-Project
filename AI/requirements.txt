@@ -1,4 +1,4 @@
-pandas
-numpy
-joblib
-scikit-learn
+pandas - ver 2.2.3
+numpy - ver 1.26.4
+joblib - ver 1.4.2
+scikit-learn - ver 1.5.2
