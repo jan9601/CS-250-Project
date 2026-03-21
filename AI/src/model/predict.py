@@ -121,7 +121,6 @@ def predict_harvest(crop_type: str, daily_weather: list[dict], season_start_date
         - crop_type supported crop name
         - daily_weather columns are date, tmin, tmax
         - season_start_date yyyy-mm-dd
-        - predicted harvest date, confidence score
 
     Returns: dictionary containing
         - crop type
