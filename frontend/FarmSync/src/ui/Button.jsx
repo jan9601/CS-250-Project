@@ -5,7 +5,7 @@
  *
  * Supports:
  * - Size variations (small, medium, large)
- * - Style variations (primary, secondary, danger)
+ * - Style variations (primary, secondary, danger, ghost)
  *
  * This component centralizes styling to ensure visual consistency.
  *
@@ -27,6 +27,8 @@ const variations = {
   secondary:
     "bg-surface text-text-primary border border-border enabled:hover:bg-bg focus:ring-action-light",
   danger: "bg-error text-white enabled:hover:brightness-90 focus:ring-error ",
+  ghost:
+    "bg-transparent text-text-secondary p-0 border-none shadow-none hover:bg-bg focus:ring-action-light",
 };
 
 export default function Button({

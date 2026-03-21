@@ -7,7 +7,7 @@ import Input from "../../ui/Input";
 import {useCreateCrop} from "./useCreateCrop";
 import {useUpdateCrop} from "./useUpdateCrop";
 
-function CreateCropForm({cropToEdit = {}}) {
+function CreateCropForm({cropToEdit = {}, onCloseModal}) {
   const {id: editId, ...editValues} = cropToEdit;
   const isEditSession = Boolean(editId);
 
@@ -26,23 +26,25 @@ function CreateCropForm({cropToEdit = {}}) {
       updateCrop(
         {updatedCrop: data, id: editId},
         {
-          onSuccess: () => reset(),
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
         },
       );
     else
       createNewCrop(data, {
-        onSuccess: () => reset(),
+        onSuccess: () => {
+          reset();
+          onCloseModal?.();
+        },
       });
-  }
-
-  function onError(errors) {
-    // console.log(errors);
   }
 
   return (
     <form
-      className="px-8 py-8 bg-surface border border-border rounded-md"
-      onSubmit={handleSubmit(onSubmit, onError)}
+      className={`px-10 py-5 bg-surface border border-border rounded-md ${onCloseModal ? "w-250" : "px-16 py-5 bg-bg border border-border rounded-lg"}`}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <FormRow label="Crop type">
         <select
@@ -118,7 +120,11 @@ function CreateCropForm({cropToEdit = {}}) {
       </FormRow>
 
       <FormRow>
-        <Button variation="secondary" type="reset">
+        <Button
+          variation="secondary"
+          type="reset"
+          onClick={() => onCloseModal?.()}
+        >
           Cancel
         </Button>
         <Button type="submit" disabled={isWorking}>
