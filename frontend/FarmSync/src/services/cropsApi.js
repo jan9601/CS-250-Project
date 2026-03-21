@@ -5,6 +5,11 @@
   using the seed data during development.
 * */
 
+import {
+  generateConfidenceScore,
+  generateCropStatus,
+  generatePredictedHarvestDate,
+} from "../utils/mockPrediction";
 import {cropsData} from "./seedCrops";
 import {getData, setData} from "./storage";
 const CROPS_KEY = "farmsync_fakeCrops";
@@ -55,12 +60,21 @@ export function createCrop(crop) {
     setTimeout(() => {
       try {
         const oldCrops = getData(CROPS_KEY) || [];
+
+        const predictedHarvestDate = generatePredictedHarvestDate(
+          crop.name,
+          crop.plantingDate,
+        );
+
+        const confidenceScore = generateConfidenceScore();
+        const status = generateCropStatus(predictedHarvestDate);
+
         const newCrop = {
           ...crop,
           id: Date.now(),
-          predictedHarvestDate: "2026-04-10",
-          confidenceScore: 0.82,
-          status: "FUTURE",
+          predictedHarvestDate,
+          confidenceScore,
+          status,
         };
         const fullNewCropsData = [...oldCrops, newCrop];
         setData(CROPS_KEY, fullNewCropsData);
