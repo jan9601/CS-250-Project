@@ -6,19 +6,46 @@
  * Unlike the Crops table, this component is focused on product-style
  * presentation, highlighting the most important commercial data such as
  * price, quantity, location, harvest date, and availability.
- */
+ * 
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+ * Marketplace actions (Farmer vs Buyer):
+
+* This card is designed to support both Farmer and Buyer views.
+*
+* Current behavior:
+* - Only "View Listing" is implemented and opens a modal with crop details.
+*
+* Planned behavior (future implementation):
+* - Farmer:
+* - Can only preview their listings (View Listing)
+*
+* - Buyer:
+*   - Can preview listings (View Listing)
+*   - Can add crops to a cart (Add to Cart)
+*
+* Note:
+* Role-based behavior (Farmer vs Buyer) is not implemented yet.
+* This will be handled in a future iteration when authentication
+* and user roles are introduced.
+*/
 
 import Button from "../../ui/Button";
+import Modal from "../../ui/Modal";
 import {formatStatus} from "../../utils/formatStatus";
+import ListingDetails from "./ListingDetails";
 
-function CropsCard({
-  cropType,
-  location,
-  predictedHarvestDate,
-  price,
-  quantity,
-  status,
-}) {
+function CropsCard({crop}) {
+  const {
+    name: cropType,
+    status,
+    location,
+    predictedHarvestDate,
+    quantity,
+    price,
+  } = crop;
   const styledStatus = getStatusStyles(status);
   return (
     <article className="rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
@@ -64,8 +91,14 @@ function CropsCard({
         </p>
         <p className="text-2xl font-bold text-action-primary">${price}</p>
       </div>
-
-      <Button className="w-full">View Listing</Button>
+      <Modal>
+        <Modal.Open opens="listing-details">
+          <Button className="w-full">View Listing</Button>
+        </Modal.Open>
+        <Modal.Window name="listing-details">
+          <ListingDetails crop={crop} />
+        </Modal.Window>
+      </Modal>
     </article>
   );
 }

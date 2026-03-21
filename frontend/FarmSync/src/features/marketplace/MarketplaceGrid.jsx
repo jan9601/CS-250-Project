@@ -13,15 +13,7 @@ function MarketplaceGrid({crops}) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {crops.map((crop) => (
-        <CropsCard
-          cropType={crop.name}
-          location={crop.location}
-          predictedHarvestDate={crop.predictedHarvestDate}
-          price={crop.price}
-          quantity={crop.quantity}
-          status={crop.status}
-          key={crop.id}
-        />
+        <CropsCard crop={crop} key={crop.id} />
       ))}
     </div>
   );

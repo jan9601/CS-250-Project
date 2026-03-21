@@ -84,7 +84,7 @@ function CropsRow({crop}) {
             <CreateCropForm cropToEdit={crop} />
           </Modal.Window>
 
-          <Modal.Open>
+          <Modal.Open opens="delete">
             <button
               type="button"
               className="cursor-pointer rounded-md p-1 transition-colors hover:bg-error/10 hover:text-error"
@@ -94,7 +94,7 @@ function CropsRow({crop}) {
               <HiTrash />
             </button>
           </Modal.Open>
-          <Modal.Window>
+          <Modal.Window name="delete">
             <ConfirmDelete
               resourceName="crops"
               disabled={isDeleting}
