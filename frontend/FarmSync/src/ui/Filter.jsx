@@ -2,7 +2,7 @@ import {useSearchParams} from "react-router-dom";
 
 function Filter({filterField, options}) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentFilter = searchParams.get(filterField) || options.at[0].value;
+  const currentFilter = searchParams.get(filterField) || options[0].value;
 
   function handleClick(value) {
     searchParams.set(filterField, value);
@@ -14,9 +14,10 @@ function Filter({filterField, options}) {
       {options.map((option) => {
         return (
           <button
+            disabled={currentFilter === option.value}
             key={option.value}
             onClick={() => handleClick(option.value)}
-            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all duration-300 cursor-pointer ${currentFilter === option.value ? "bg-action-primary text-white" : "bg-surface text-text-primary hover:bg-action-primary hover:text-white"}`}
+            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all duration-300 cursor-pointer disabled:cursor-not-allowed ${currentFilter === option.value ? "bg-action-primary text-white" : "bg-surface text-text-primary hover:bg-action-primary hover:text-white"}`}
           >
             {option.label}
           </button>

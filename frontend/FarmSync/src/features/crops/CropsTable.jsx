@@ -1,15 +1,7 @@
 import {useSearchParams} from "react-router-dom";
-import CropsRow from "./CropsRow";
 import {useCrops} from "./useCrops";
+import CropsRow from "./CropsRow";
 
-/**
- * CropsTable
- * ----------
- * Displays the farmer's crops in a table-like layout.
- *
- * The header and rows share the same `.crops-row` grid class
- * so that all columns stay aligned.
- */
 function CropsTable() {
   const {isLoading, crops} = useCrops();
   const [searchParams] = useSearchParams();
@@ -21,10 +13,10 @@ function CropsTable() {
       </div>
     );
 
+  // 1) FILTER
   const filterValue = searchParams.get("status") || "all";
-  console.log(crops);
-
   let filteredCrops;
+
   if (filterValue === "all") filteredCrops = crops;
   if (filterValue === "harvest-soon")
     filteredCrops = crops.filter((crop) => crop.status === "HARVEST_SOON");
@@ -33,19 +25,35 @@ function CropsTable() {
   if (filterValue === "available")
     filteredCrops = crops.filter((crop) => crop.status === "AVAILABLE");
 
+  // 2) SORT
+  const sortBy = searchParams.get("sortBy") || "predictedHarvestDate-asc";
+  const [field, direction] = sortBy.split("-");
+  const modifier = direction === "asc" ? 1 : -1;
+
+  const sortedCrops = filteredCrops?.slice()?.sort((a, b) => {
+    if (field === "predictedHarvestDate") {
+      return (
+        (new Date(a.predictedHarvestDate) - new Date(b.predictedHarvestDate)) *
+        modifier
+      );
+    }
+
+    return (a[field] - b[field]) * modifier;
+  });
+
   return (
-    <div className="overflow-hidden rounded-lg border border-border bg-surface ">
+    <div className="overflow-hidden rounded-lg border border-border bg-surface">
       <div className="crops-row-header border-b border-border bg-bg text-[11px] font-semibold uppercase tracking-wide text-text-secondary">
-        <div className=" justify-self-start">Name</div>
-        <div className=" justify-self-center ml-7">Harvest</div>
-        <div className=" justify-self-center">Confidence</div>
-        <div className=" justify-self-center">Price</div>
-        <div className=" justify-self-center">Quantity</div>
-        <div className=" justify-self-center">Status</div>
-        <div className=" justify-self-center">Actions</div>
+        <div className="justify-self-start">Name</div>
+        <div className="justify-self-center ml-7">Harvest</div>
+        <div className="justify-self-center">Confidence</div>
+        <div className="justify-self-center">Price</div>
+        <div className="justify-self-center">Quantity</div>
+        <div className="justify-self-center">Status</div>
+        <div className="justify-self-center">Actions</div>
       </div>
 
-      {filteredCrops.map((crop) => (
+      {sortedCrops.map((crop) => (
         <CropsRow crop={crop} key={crop.id} />
       ))}
     </div>

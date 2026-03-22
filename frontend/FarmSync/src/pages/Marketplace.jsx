@@ -1,3 +1,4 @@
+import CropsTableOperations from "../features/crops/CropsTableOperations";
 import MarketplaceLayout from "../features/marketplace/MarketplaceLayout";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
@@ -9,7 +10,7 @@ function MarketPlace() {
         <Heading type="h1" className="text-text-primary">
           Marketplace
         </Heading>
-        <p>Filter / Sort</p>
+        <CropsTableOperations />
       </Row>
       <Row>
         <MarketplaceLayout />
