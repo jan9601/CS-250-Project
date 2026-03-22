@@ -3,6 +3,7 @@ import Button from "../ui/Button";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import AddCrop from "../features/crops/AddCrop";
+import CropsTableOperations from "../features/crops/CropsTableOperations";
 
 function Crops() {
   return (
@@ -11,7 +12,7 @@ function Crops() {
         <Heading type="h1" className="text-text-primary">
           All crops
         </Heading>
-        <p>Filter / Sort</p>
+        <CropsTableOperations />
       </Row>
       <Row>
         <CropsTable />

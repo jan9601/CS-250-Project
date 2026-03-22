@@ -1,3 +1,4 @@
+import {useSearchParams} from "react-router-dom";
 import CropsRow from "./CropsRow";
 import {useCrops} from "./useCrops";
 
@@ -11,6 +12,7 @@ import {useCrops} from "./useCrops";
  */
 function CropsTable() {
   const {isLoading, crops} = useCrops();
+  const [searchParams] = useSearchParams();
 
   if (isLoading)
     return (
@@ -18,6 +20,18 @@ function CropsTable() {
         <span className="loader"></span>
       </div>
     );
+
+  const filterValue = searchParams.get("status") || "all";
+  console.log(crops);
+
+  let filteredCrops;
+  if (filterValue === "all") filteredCrops = crops;
+  if (filterValue === "harvest-soon")
+    filteredCrops = crops.filter((crop) => crop.status === "HARVEST_SOON");
+  if (filterValue === "future")
+    filteredCrops = crops.filter((crop) => crop.status === "FUTURE");
+  if (filterValue === "available")
+    filteredCrops = crops.filter((crop) => crop.status === "AVAILABLE");
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-surface ">
@@ -31,7 +45,7 @@ function CropsTable() {
         <div className=" justify-self-center">Actions</div>
       </div>
 
-      {crops.map((crop) => (
+      {filteredCrops.map((crop) => (
         <CropsRow crop={crop} key={crop.id} />
       ))}
     </div>

@@ -51,16 +51,16 @@ function CropsCard({crop}) {
     <article className="rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
       <div className="mb-4 flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
+          <p className="text-[10px] font-medium uppercase tracking-wide text-text-secondary">
             Crop
           </p>
-          <h3 className="text-xl font-semibold text-text-primary">
+          <h3 className="text-[17px] font-semibold text-text-primary">
             {cropType}
           </h3>
         </div>
 
         <span
-          className={`rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap ${styledStatus}`}
+          className={`rounded-full px-3 py-1 text-[11px] font-semibold whitespace-nowrap ${styledStatus}`}
         >
           {formatStatus(status)}
         </span>

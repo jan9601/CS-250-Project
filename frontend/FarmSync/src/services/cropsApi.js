@@ -55,6 +55,14 @@ export function deleteCrop(id) {
   });
 }
 
+/*
+  While the backend prediction service is not available,
+  crop prediction fields are generated locally in the mock API.
+
+  These derived fields are recalculated on both create and edit
+  so the UI always stays in sync with the latest crop form data.
+*/
+
 export function createCrop(crop) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -90,9 +98,26 @@ export function createCrop(crop) {
 export function updateExistingCrop(updatedCrop, id) {
   const crops = getData(CROPS_KEY) || [];
 
-  const newCrops = crops.map((crop) =>
-    crop.id === id ? {...crop, ...updatedCrop} : crop,
-  );
+  const newCrops = crops.map((crop) => {
+    if (crop.id !== id) return crop;
+
+    const predictedHarvestDate = generatePredictedHarvestDate(
+      updatedCrop.name,
+      updatedCrop.plantingDate,
+      updatedCrop.location,
+    );
+
+    const confidenceScore = generateConfidenceScore();
+    const status = generateCropStatus(predictedHarvestDate);
+
+    return {
+      ...crop,
+      ...updatedCrop,
+      predictedHarvestDate,
+      confidenceScore,
+      status,
+    };
+  });
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -101,7 +126,7 @@ export function updateExistingCrop(updatedCrop, id) {
         resolve(newCrops);
       } catch (error) {
         console.error(error);
-        reject(new Error("Crop could not be added"));
+        reject(new Error("Crop could not be updated"));
       }
     }, 300);
   });
