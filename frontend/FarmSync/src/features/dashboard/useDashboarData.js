@@ -3,6 +3,7 @@ import {
   getDashboardStats,
   getHarvestTimelineData,
   getCropsByStatusData,
+  getUpcomingCrops,
 } from "./dashboardData";
 
 /**
@@ -22,10 +23,11 @@ export function useDashboardData() {
   const stats = getDashboardStats(crops);
   const timelineData = getHarvestTimelineData(crops);
   const statusData = getCropsByStatusData(crops);
+  const upcomingCrops = getUpcomingCrops(crops);
 
   return {
     isLoading,
-    crops,
+    upcomingCrops,
     stats,
     timelineData,
     statusData,

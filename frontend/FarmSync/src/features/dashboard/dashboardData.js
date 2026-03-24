@@ -118,3 +118,20 @@ export function getCropsByStatusData(crops) {
     value,
   }));
 }
+
+export function getUpcomingCrops(crops) {
+  if (!crops || crops.length === 0) return [];
+
+  const today = new Date();
+
+  const soonestCrops = crops
+    .slice()
+    .filter((crop) => new Date(crop.predictedHarvestDate) >= today)
+    .sort(
+      (a, b) =>
+        new Date(a.predictedHarvestDate) - new Date(b.predictedHarvestDate),
+    )
+    .slice(0, 4);
+
+  return soonestCrops;
+}

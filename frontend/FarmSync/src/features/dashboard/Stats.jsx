@@ -12,7 +12,7 @@ function Stats({stats}) {
   const {totalCrops, totalQuantity, totalInventoryValue, harvestSoonCount} =
     stats;
   return (
-    <Row type="horizontal" className="gap-10">
+    <Row type="horizontal" className="gap-8">
       <Stat
         title="Total crops"
         value={totalCrops}

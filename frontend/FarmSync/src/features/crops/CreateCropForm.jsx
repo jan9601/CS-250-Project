@@ -21,7 +21,6 @@ function CreateCropForm({cropToEdit = {}, onCloseModal}) {
   const isWorking = isCreating || isUpdating;
 
   function onSubmit(data) {
-    console.log(data);
     if (isEditSession)
       updateCrop(
         {updatedCrop: data, id: editId},

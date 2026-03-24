@@ -26,7 +26,7 @@ function CropsRow({crop}) {
   const {
     id: cropId,
     name,
-    plantingDate,
+
     predictedHarvestDate,
     confidenceScore,
     price,

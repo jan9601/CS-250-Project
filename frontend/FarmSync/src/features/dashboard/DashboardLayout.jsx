@@ -1,14 +1,12 @@
+import CropsStatusChart from "./CropsStatusChart";
+import HarvestTimelineChart from "./HarvestTimelineChart";
 import Stats from "./Stats";
+import UpcomingHarvests from "./UpcomingHarvests";
 import {useDashboardData} from "./useDashboarData";
 
 function DashboardLayout() {
-  const {isLoading, crops, stats, timelineData, statusData} =
+  const {isLoading, upcomingCrops, stats, timelineData, statusData} =
     useDashboardData();
-
-  console.log(crops);
-  console.log(stats);
-  console.log(timelineData);
-  console.log(statusData);
 
   if (isLoading)
     return (
@@ -18,8 +16,19 @@ function DashboardLayout() {
     );
 
   return (
-    <div className="grid grid-cols-4 grid-rows[auto 34rem auto] gap-10">
-      <Stats stats={stats} />
+    <div className="grid grid-cols-4 gap-8">
+      <div className="col-span-full">
+        <Stats stats={stats} />
+      </div>
+      <div className="col-span-2">
+        <UpcomingHarvests upcomingCrops={upcomingCrops} />
+      </div>
+      <div className="col-span-2">
+        <CropsStatusChart statusData={statusData} />
+      </div>
+      <div className="col-span-full">
+        <HarvestTimelineChart timelineData={timelineData} />
+      </div>
     </div>
   );
 }
