@@ -1,6 +1,7 @@
 import {useSearchParams} from "react-router-dom";
 import {useCrops} from "./useCrops";
 import CropsRow from "./CropsRow";
+import Pagination, {PAGE_SIZE} from "../../ui/Pagination";
 
 function CropsTable() {
   const {isLoading, crops} = useCrops();
@@ -40,6 +41,12 @@ function CropsTable() {
 
     return (a[field] - b[field]) * modifier;
   });
+  // 3) PAGINATION
+  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+  const from = (page - 1) * PAGE_SIZE;
+  const to = from + PAGE_SIZE;
+
+  const paginatedCrops = sortedCrops.slice(from, to);
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-surface">
@@ -53,9 +60,13 @@ function CropsTable() {
         <div className="justify-self-center">Actions</div>
       </div>
 
-      {sortedCrops.map((crop) => (
+      {paginatedCrops.map((crop) => (
         <CropsRow crop={crop} key={crop.id} />
       ))}
+
+      <div className="bg-bg flex justify-center p-3">
+        <Pagination count={sortedCrops.length} />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import {useSearchParams} from "react-router-dom";
 import {useCrops} from "../crops/useCrops";
 import MarketplaceGrid from "./MarketplaceGrid";
+import Pagination, {PAGE_SIZE} from "../../ui/Pagination";
 
 function MarketplaceLayout() {
   const {isLoading, crops} = useCrops();
@@ -34,13 +35,28 @@ function MarketplaceLayout() {
     return (a[field] - b[field]) * modifier;
   });
 
+  // PAGINATION
+  // 3) PAGINATION
+  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+  const from = (page - 1) * PAGE_SIZE;
+  const to = from + PAGE_SIZE;
+
+  const paginatedCrops = sortedCrops.slice(from, to);
+
   if (isLoading)
     return (
       <div className="flex items-center justify-center h-full">
         <span className="loader"></span>
       </div>
     );
-  return <MarketplaceGrid crops={sortedCrops} />;
+  return (
+    <div>
+      <div className="bg-bg flex justify-center p-3">
+        <Pagination count={sortedCrops.length} />
+      </div>
+      <MarketplaceGrid crops={paginatedCrops} />
+    </div>
+  );
 }
 
 export default MarketplaceLayout;
