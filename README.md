@@ -3,7 +3,7 @@
 # Overview
 FarmSync's purpose is to find the solution to two main problems regarding local farms: excess crops and unreliability. Making harvest dates more predictable would allow farmers to know who is interested in their crops before they are harvested, and also make local farmers more reliable for nearby buyers. 
 
-The platform is designed to support farmer and buyer login. On the farmer side it shows crops and their status, while on the buyers page it shows available crops that can be purchased and checked out.
+The platform is designed to support farmer and buyer login. On the farmer side it shows crops and their status, while on the buyers page it shows available crops that can be purchased and checked out. Farmers can list their future crops so buyers can express their interest before the crops are even picked. Buyers such as local restaurants can buy local food in advance. This helps farmers sell more of what they grow and helps buyers get the freshest food possible.
 
 The farmers can see a predicted harvest date for their future crops, and the confidence of the AI who predicted that date. The AI predicts based off of historical weather data for that region using sensors from the farm (mock sensors for our MVP). 
 
