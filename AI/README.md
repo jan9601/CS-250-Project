@@ -23,15 +23,16 @@ predict_harvest(crop_type, daily_weather, season_start_date)
 crop_type : a string identifying the crop (right now only ones supported are "almonds" & "table_grapes"
 
 daily_weather : a list of dictionarys containting daily weather observations
+
 Each dict entry must contain date, tmin, tmax<br/>
 <sub>YYYY-MM-DD, daily minimum temperature (ºC), daily maximum temperature (ºC)</sub>
 
 example: 
 ```
 [
-  {"date": "2024-06-10", "tmin": 15.2, "tmax": 31.8],
-  {"date": "2024-06-11", "tmin": 16.2, "tmax": 33.1],
-  {"date": "2024-06-12", "tmin": 15.6, "tmax": 31.2],
+  {"date": "2024-06-10", "tmin": 15.2, "tmax": 31.8},
+  {"date": "2024-06-11", "tmin": 16.2, "tmax": 33.1},
+  {"date": "2024-06-12", "tmin": 15.6, "tmax": 31.2},
 ]
 ```
 
