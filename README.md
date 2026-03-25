@@ -16,7 +16,7 @@ The farmers can see a predicted harvest date for their future crops, and the con
 
 # Project sections
 Each section has a branch and a related README.md for more info on that section!
-AI - AI models related to estimating/ predicting the harvest date for a type of crop (see ml-dev/Farmsync branch for more info)
-Backend - currently handles login related tasks. In future would handle data processing, returning results to the frontend, etc.
-Frontend - Displays different things based on what type of user logged in (farmer/buyer). Has a marketplace and dashboard where, if a farmer, one can manage and list their future/ current crops. If a buyer, one can browse and buy or pre-order available crops.
+- AI - AI models related to estimating/ predicting the harvest date for a type of crop (see ml-dev/Farmsync branch for more info)
+- Backend - currently handles login related tasks. In future would handle data processing, returning results to the frontend, etc.
+- Frontend - Displays different things based on what type of user logged in (farmer/buyer). Has a marketplace and dashboard where, if a farmer, one can manage and list their future/ current crops. If a buyer, one can browse and buy or pre-order available crops.
 
