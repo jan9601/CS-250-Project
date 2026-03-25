@@ -22,8 +22,8 @@ predict_harvest(crop_type, daily_weather, season_start_date)
 ### Parameters
 crop_type : a string identifying the crop (right now only ones supported are "almonds" & "table_grapes"
 
-daily_weather : a list of daily weather observations
-Each entry must contain date, tmin, tmax<br/>
+daily_weather : a list of dictionarys containting daily weather observations
+Each dict entry must contain date, tmin, tmax<br/>
 <sub>YYYY-MM-DD, daily minimum temperature (ºC), daily maximum temperature (ºC)</sub>
 
 example: 
