@@ -1,4 +1,4 @@
-# FarmSync
+# FarmSync 𖧧
 
 # Overview
 FarmSync's purpose is to find the solution to two main problems regarding local farms: excess crops and unreliability. Making harvest dates more predictable would allow farmers to know who is interested in their crops before they are harvested, and also make local farmers more reliable for nearby buyers. 
